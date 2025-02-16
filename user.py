@@ -3,7 +3,7 @@ import re
 def valid_first_name():
     """
     Validates the first name.
-
+    
     - The name must start with an uppercase letter.
     - The remaining letters should be lowercase.
     - Minimum length: 2 characters.
@@ -31,10 +31,13 @@ def valid_first_name():
 def valid_last_name(last_name):
     """
     Validates the last name.
+    
     - The last name must start with an uppercase letter.
     - Must be at least 3 characters long.
+
     Args:
         last_name (str): The last name entered by the user.
+
     Returns:
         None
     """
@@ -54,9 +57,38 @@ def valid_last_name(last_name):
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+def valid_email():
+    """
+    Validates an email address.
+
+    - Must contain alphanumeric characters before @.
+    - Can have an optional dot before @.
+    - Must have a domain after @ with at least 2 letters.
+    - Can have an optional subdomain.
+
+    Returns:
+        None
+    """
+    try:
+        pattern = r"^[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$"
+        email = input("Enter your email: ").strip()
+
+        if not email:
+            raise ValueError("Email cannot be empty.")
+
+        if re.match(pattern, email):
+            print("Valid email.")
+        else:
+            print("Not a valid email.")
+
+    except ValueError as ve:
+        print(f"Error: {ve}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
 def main():
     """
-    Main function to execute name validation.
+    Main function to execute all validation functions.
     """
     try:
         valid_first_name()
@@ -64,8 +96,10 @@ def main():
         last_name = input("Enter your last name: ").strip()
         valid_last_name(last_name)
 
+        valid_email()
+
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
