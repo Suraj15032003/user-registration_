@@ -19,9 +19,9 @@ def valid_first_name():
             raise ValueError("First name cannot be empty.")
 
         if re.match(pattern, first_name):
-            print("It is a valid name.")
+            print("Valid first name.")
         else:
-            print("It is an invalid name.")
+            print("Invalid first name. It should start with an uppercase letter and have at least 2 characters.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -46,9 +46,9 @@ def valid_last_name():
             raise ValueError("Last name cannot be empty.")
 
         if re.match(pattern, last_name):
-            print("The last name is valid.")
+            print("Valid last name.")
         else:
-            print("It is not a valid name.")
+            print("Invalid last name. It should start with an uppercase letter and have at least 3 characters.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -77,7 +77,7 @@ def valid_email():
         if re.match(pattern, email):
             print("Valid email.")
         else:
-            print("Not a valid email.")
+            print("Invalid email format. Please enter a valid email (e.g., example@gmail.com).")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -96,7 +96,7 @@ def valid_mobile_number():
     """
     try:
         pattern = r"^(91)[6-9][0-9]{9}$"
-        mobile_number = input("Enter your phone number: ").strip()
+        mobile_number = input("Enter your phone number (with country code 91): ").strip()
 
         if not mobile_number:
             raise ValueError("Mobile number cannot be empty.")
@@ -104,7 +104,33 @@ def valid_mobile_number():
         if re.match(pattern, mobile_number):
             print("Valid mobile number.")
         else:
-            print("Not a valid number.")
+            print("Invalid mobile number. It must start with '91' and have 10 digits after it.")
+
+    except ValueError as ve:
+        print(f"Error: {ve}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
+def validate_password():
+    """
+    Validates if a password meets minimum length criteria.
+    
+    - Must be at least 8 characters long.
+
+    Returns:
+        None
+    """
+    try:
+        password = input("Enter your password: ").strip()
+
+        if not password:
+            raise ValueError("Password cannot be empty.")
+
+        pattern = r"^.{8,}$"
+        if re.match(pattern, password):
+            print("Valid password.")
+        else:
+            print("Invalid password. It must be at least 8 characters long.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -120,8 +146,9 @@ def main():
         valid_last_name()
         valid_email()
         valid_mobile_number()
+        validate_password()
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
