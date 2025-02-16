@@ -25,8 +25,6 @@ def valid_first_name():
 
     except ValueError as ve:
         print(f"Error: {ve}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
 
 def valid_last_name():
     """
@@ -52,8 +50,6 @@ def valid_last_name():
 
     except ValueError as ve:
         print(f"Error: {ve}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
 
 def valid_email():
     """
@@ -81,8 +77,6 @@ def valid_email():
 
     except ValueError as ve:
         print(f"Error: {ve}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
 
 def valid_mobile_number():
     """
@@ -108,8 +102,6 @@ def valid_mobile_number():
 
     except ValueError as ve:
         print(f"Error: {ve}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
 
 def validate_password():
     """
@@ -134,8 +126,6 @@ def validate_password():
 
     except ValueError as ve:
         print(f"Error: {ve}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
 
 def password_uppercase():
     """
@@ -156,14 +146,39 @@ def password_uppercase():
         pattern = r"^(?=.*[A-Z]).{8,}$"
 
         if re.match(pattern, password):
-            print("Password is valid (contains at least one uppercase letter).")
+            print("Valid password (contains at least one uppercase letter).")
         else:
             print("Invalid password. It must have at least one uppercase letter.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
+
+def password_numeric():
+    """
+    Validates if a password contains at least one numeric digit.
+
+    - Must be at least 8 characters long.
+    - Must contain at least one uppercase letter.
+    - Must contain at least one digit.
+
+    Returns:
+        None
+    """
+    try:
+        password = input("Enter a password for numeric validation: ").strip()
+
+        if not password:
+            raise ValueError("Password cannot be empty.")
+
+        pattern = r"^(?=.[A-Z])(?=.\d).{8,}$"
+
+        if re.match(pattern, password):
+            print("Valid password (contains at least one uppercase letter and one number).")
+        else:
+            print("Invalid password. It must have at least one uppercase letter and one number.")
+
+    except ValueError as ve:
+        print(f"Error: {ve}")
 
 def main():
     """
@@ -176,6 +191,7 @@ def main():
         valid_mobile_number()
         validate_password()
         password_uppercase()
+        password_numeric()
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
