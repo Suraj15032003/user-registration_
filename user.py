@@ -4,9 +4,9 @@ def valid_first_name():
     """
     Validates the first name.
     
-    - The name must start with an uppercase letter.
-    - The remaining letters should be lowercase.
-    - Minimum length: 2 characters.
+    - Must start with an uppercase letter.
+    - Remaining letters should be lowercase.
+    - Minimum 2 characters.
 
     Returns:
         None
@@ -21,7 +21,7 @@ def valid_first_name():
         if re.match(pattern, first_name):
             print("Valid first name.")
         else:
-            print("Invalid first name. It should start with an uppercase letter and have at least 2 characters.")
+            print("Invalid first name. Must start with an uppercase letter and be at least 2 characters long.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -30,7 +30,7 @@ def valid_last_name():
     """
     Validates the last name.
     
-    - The last name must start with an uppercase letter.
+    - Must start with an uppercase letter.
     - Must be at least 3 characters long.
 
     Returns:
@@ -46,7 +46,7 @@ def valid_last_name():
         if re.match(pattern, last_name):
             print("Valid last name.")
         else:
-            print("Invalid last name. It should start with an uppercase letter and have at least 3 characters.")
+            print("Invalid last name. Must start with an uppercase letter and be at least 3 characters long.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -57,8 +57,7 @@ def valid_email():
 
     - Must contain alphanumeric characters before @.
     - Can have an optional dot before @.
-    - Must have a domain after @ with at least 2 letters.
-    - Can have an optional subdomain.
+    - Must have a valid domain and subdomain.
 
     Returns:
         None
@@ -98,15 +97,15 @@ def valid_mobile_number():
         if re.match(pattern, mobile_number):
             print("Valid mobile number.")
         else:
-            print("Invalid mobile number. It must start with '91' and have 10 digits after it.")
+            print("Invalid mobile number. Must start with '91' and have 10 digits after it.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
 
 def validate_password():
     """
-    Validates if a password meets minimum length criteria.
-    
+    Validates password length.
+
     - Must be at least 8 characters long.
 
     Returns:
@@ -120,16 +119,16 @@ def validate_password():
 
         pattern = r"^.{8,}$"
         if re.match(pattern, password):
-            print("Valid password.")
+            print("Valid password (length is sufficient).")
         else:
-            print("Invalid password. It must be at least 8 characters long.")
+            print("Invalid password. Must be at least 8 characters long.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
 
 def password_uppercase():
     """
-    Checks if a password contains at least one uppercase letter.
+    Validates if a password contains at least one uppercase letter.
 
     - Must be at least 8 characters long.
     - Must contain at least one uppercase letter.
@@ -148,7 +147,7 @@ def password_uppercase():
         if re.match(pattern, password):
             print("Valid password (contains at least one uppercase letter).")
         else:
-            print("Invalid password. It must have at least one uppercase letter.")
+            print("Invalid password. Must contain at least one uppercase letter.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -159,7 +158,7 @@ def password_numeric():
 
     - Must be at least 8 characters long.
     - Must contain at least one uppercase letter.
-    - Must contain at least one digit.
+    - Must contain at least one numeric digit.
 
     Returns:
         None
@@ -175,7 +174,35 @@ def password_numeric():
         if re.match(pattern, password):
             print("Valid password (contains at least one uppercase letter and one number).")
         else:
-            print("Invalid password. It must have at least one uppercase letter and one number.")
+            print("Invalid password. Must have at least one uppercase letter and one number.")
+
+    except ValueError as ve:
+        print(f"Error: {ve}")
+
+def password_special_character():
+    """
+    Validates if a password contains at least one special character.
+
+    - Must be at least 8 characters long.
+    - Must contain at least one uppercase letter.
+    - Must contain at least one numeric digit.
+    - Must contain at least one special character.
+
+    Returns:
+        None
+    """
+    try:
+        password = input("Enter a password for special character validation: ").strip()
+
+        if not password:
+            raise ValueError("Password cannot be empty.")
+
+        pattern = r"^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[^a-zA-Z0-9]).{8,}$"
+
+        if re.match(pattern, password):
+            print("Valid password (contains at least one uppercase letter, one number, and one special character).")
+        else:
+            print("Invalid password. Must contain at least one uppercase letter, one number, and one special character.")
 
     except ValueError as ve:
         print(f"Error: {ve}")
@@ -192,6 +219,7 @@ def main():
         validate_password()
         password_uppercase()
         password_numeric()
+        password_special_character()
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
