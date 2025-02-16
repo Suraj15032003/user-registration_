@@ -137,6 +137,34 @@ def validate_password():
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+def password_uppercase():
+    """
+    Checks if a password contains at least one uppercase letter.
+
+    - Must be at least 8 characters long.
+    - Must contain at least one uppercase letter.
+
+    Returns:
+        None
+    """
+    try:
+        password = input("Enter a password for uppercase validation: ").strip()
+
+        if not password:
+            raise ValueError("Password cannot be empty.")
+
+        pattern = r"^(?=.*[A-Z]).{8,}$"
+
+        if re.match(pattern, password):
+            print("Password is valid (contains at least one uppercase letter).")
+        else:
+            print("Invalid password. It must have at least one uppercase letter.")
+
+    except ValueError as ve:
+        print(f"Error: {ve}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
 def main():
     """
     Main function to execute all validation functions.
@@ -147,6 +175,7 @@ def main():
         valid_email()
         valid_mobile_number()
         validate_password()
+        password_uppercase()
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
