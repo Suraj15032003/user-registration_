@@ -12,7 +12,7 @@ def valid_first_name():
         None
     """
     try:
-        pattern = "^[A-Z][a-z]{1,}$"
+        pattern = r"^[A-Z][a-z]{1,}$"
         first_name = input("Enter first name: ").strip()
 
         if not first_name:
@@ -28,22 +28,20 @@ def valid_first_name():
     except Exception as e:
         print(f"Unexpected error: {e}")
 
-def valid_last_name(last_name):
+def valid_last_name():
     """
     Validates the last name.
     
     - The last name must start with an uppercase letter.
     - Must be at least 3 characters long.
 
-    Args:
-        last_name (str): The last name entered by the user.
-
     Returns:
         None
     """
     try:
-        pattern = "^[A-Z][a-z]{2,}$"
-        
+        pattern = r"^[A-Z][a-z]{2,}$"
+        last_name = input("Enter your last name: ").strip()
+
         if not last_name:
             raise ValueError("Last name cannot be empty.")
 
@@ -86,18 +84,42 @@ def valid_email():
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+def valid_mobile_number():
+    """
+    Validates an Indian mobile number.
+
+    - Must start with '91'.
+    - Must have 10 digits starting with 6-9.
+
+    Returns:
+        None
+    """
+    try:
+        pattern = r"^(91)[6-9][0-9]{9}$"
+        mobile_number = input("Enter your phone number: ").strip()
+
+        if not mobile_number:
+            raise ValueError("Mobile number cannot be empty.")
+
+        if re.match(pattern, mobile_number):
+            print("Valid mobile number.")
+        else:
+            print("Not a valid number.")
+
+    except ValueError as ve:
+        print(f"Error: {ve}")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+
 def main():
     """
     Main function to execute all validation functions.
     """
     try:
         valid_first_name()
-        
-        last_name = input("Enter your last name: ").strip()
-        valid_last_name(last_name)
-
+        valid_last_name()
         valid_email()
-
+        valid_mobile_number()
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
